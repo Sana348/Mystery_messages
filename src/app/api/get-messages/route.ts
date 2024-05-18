@@ -38,5 +38,15 @@ export async function GET(request: Request) {
         }
       );
   
-  } catch (error) {}
+  } 
+  catch (error) {
+    console.error('An unexpected error occurred:', error);
+    return Response.json(
+      { message: 'Internal server error', success: false },
+      { status: 500 }
+    );
+  }
+}
+
+  }
 }
