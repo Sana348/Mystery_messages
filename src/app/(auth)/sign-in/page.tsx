@@ -1,31 +1,44 @@
-"use client"
+'use client';
+import { Input } from "@/components/ui/input"
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useForm } from "react-hook-form"
-import * as z from "zod"
-import Link from "next/link";
-import { useState } from "react";
-import { useDebounceValue } from 'usehooks-ts';
-import { useToast } from "@/components/ui/use-toast"
-import { useRouter } from 'next/navigation';
-import { useEffect } from "react";
+import { ApiResponse } from '@/types/ApiResponse';
+import { zodResolver } from '@hookform/resolvers/zod';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useDebounceValue } from 'usehooks-ts'
+import * as z from 'zod';
+
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+
+import { useToast } from '@/components/ui/use-toast';
 import axios, { AxiosError } from 'axios';
-import { ApiResponse } from "@/types/ApiResponse";
+import { Loader2 } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { signUpSchema } from '@/schemas/signUpSchema';
 
-const page = () => {
-  const [username, setUsername] = useState('')
-  const [usernameMessage, setUsernameMessage] = useState('')
-  const [isCheckingUsername, setIsCheckingUsername] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
+export default function SignUpForm() {
+  const [username, setUsername] = useState('');
+  const [usernameMessage, setUsernameMessage] = useState('');
+  const [isCheckingUsername, setIsCheckingUsername] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const debouncedUsername = useDebounceValue(username, 300);
 
-  const debouncedUsername = useDebounceValue(username, 300)
-  const { toast } = useToast()
   const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<z.infer<typeof signUpSchema>>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      identifier: '',
+      username: '',
+      email: '',
       password: '',
     },
   });
@@ -53,10 +66,8 @@ const page = () => {
     checkUsernameUnique();
   }, [debouncedUsername]);
 
-
   const onSubmit = async (data: z.infer<typeof signUpSchema>) => {
-
-    setIsSubmitting(true)
+    setIsSubmitting(true);
     try {
       const response = await axios.post<ApiResponse>('/api/sign-up', data);
 
@@ -106,7 +117,7 @@ const page = () => {
                   <FormLabel>Username</FormLabel>
                   <Input
                     {...field}
-                    onChange={(e) => {
+                    onChange={(e:any) => {
                       field.onChange(e);
                       setUsername(e.target.value);
                     }}
