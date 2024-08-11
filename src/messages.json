@@ -1,17 +1,22 @@
 [
-    {
-      "title": "Message from User123",
-      "content": "Hey, how are you doing today?",
-      "received": "10 minutes ago"
-    },
-    {
-      "title": "Message from SecretAdmirer",
-      "content": "I really liked your recent post!",
-      "received": "2 hours ago"
-    },
-    {
-      "title": "Message from MysteryGuest",
-      "content": "Do you have any book recommendations?",
-      "received": "1 day ago"
-    }
-  ]
+  {
+    "title": "Message from BookLover42",
+    "content": "What are you currently reading?",
+    "received": "5 minutes ago"
+  },
+  {
+    "title": "Message from CodeMaster99",
+    "content": "Could you help me with this coding problem?",
+    "received": "30 minutes ago"
+  },
+  {
+    "title": "Message from AdventureSeeker",
+    "content": "Do you have any travel tips for a first-time solo traveler?",
+    "received": "3 hours ago"
+  },
+  {
+    "title": "Message from TechGuru",
+    "content": "What’s your favorite programming language?",
+    "received": "2 days ago"
+  }
+]
